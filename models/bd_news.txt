@@ -1,0 +1,12 @@
+CREATE DATABASE bd_news;
+USE bd_news;
+
+CREATE TABLE news(
+	id smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+	auteur VARCHAR(30) NOT NULL,
+	titre VARCHAR(100) NOT NULL,
+	contenu TEXT NOT NULL,
+	dateAjout DATETIME NOT NULL,
+	dateModif DATETIME NOT NULL,
+	PRIMARY KEY(id)
+);
