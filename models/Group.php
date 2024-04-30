@@ -11,11 +11,12 @@ class Group {
     }
     
     // Méthode pour créer un groupe
-public function createGroup($nomGroupe, $utilisateurs) {
+public function createGroup($nomGroupe,$profil, $utilisateurs) {
   // Insérer le groupe dans la base de données
-  $query = "INSERT INTO groups (name) VALUES (:nomGroupe)";
+  $query = "INSERT INTO groups (name,profil) VALUES (:nomGroupe,:profil)";
   $stmt = $this->db->prepare($query);
   $stmt->bindValue(':nomGroupe', $nomGroupe);
+  $stmt->bindValue(':profil', $profil);
   $stmt->execute();
   $groupId = $this->db->lastInsertId();
   

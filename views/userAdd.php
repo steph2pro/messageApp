@@ -5,7 +5,7 @@
     <div class="text-center">
  
       <h1>Ajouter un utilisateur!</h1>
-      <form method="post" action="./controllers/userController.php?action=create"  enctype="multipart/form-data">
+      <form method="post" action="./controllers/userController.php?action=create" >
     <div class="row mb-3">
         <label for="inputEmail3" class="col-sm-2 col-form-label">nom d'utilisateur</label>
         <div class="col-sm-10">

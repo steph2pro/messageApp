@@ -15,16 +15,59 @@ if (isset($_GET['action'])) {
                 // Récupérer les données du formulaire
                 $nom = $_POST['nom'];
                 $utilisateurs = $_POST['utilisateurs'];
+                $profil = $_POST['profil'];
+                
+                if (isset($_FILES["profil"])){
+                          
+                    # recuperation des information sur limage
+                    $img_name=$_FILES["profil"]["name"];
+                    $img_size=$_FILES["profil"]["size"]/1024;//pour convertir la taille es Ko
+                    $tmp_name=$_FILES["profil"]["tmp_name"];
+                    if ($img_size>100000) {
+                        //message d'erreur
+                        $_SESSION["msg"]="desole,ce fichier est trop grand !";
+                        
+                        header('location:../index.php?p=groupAdd');
+                   }else{
+                        //recuperation de l'extension du fichier
+                        $img_ex=pathinfo($img_name,PATHINFO_EXTENSION);
+                        //convertion de cet extension en miniscule
+                        $img_ex_min=strtolower($img_ex);
+                        //creation d'un tableau pour stocker les extenssion acceptable
+                        $allowed_exs=array("jpg","jpeg","png");
+                        //test si l'extension de l'image est parmi de ceux acceptable
+                        if (in_array($img_ex_min,$allowed_exs)) {
+                            //on renome l'image en le donant un nom aleatoir
+                            $profil=uniqid("PROFILE-",true).'.'.$img_ex_min;
+                            //creation du repertoire pour les image
+                            $img_upload_path="../assets/profiles/".$profil;
+                            //on deplace l'image vers le dossier profiles
+                            move_uploaded_file($tmp_name,$img_upload_path);
+                            //enregistrement dans la bd       
+                            // Appeler la méthode create  pour ajouter le group dans la base de données
+                            $groupId = $groupBD->createGroup($nom,$profil, $utilisateurs);
+                            $_SESSION["msg"]="group ".$nom." creer avec succes";
+                            // Rediriger vers la page de détails de la news créée
+                            header("Location: ../index.php");
+                        }else{
+                            //message d'erreur a cause du type de fichier
+                            $_SESSION["msg"]="desole,ce fichier n'est pas le type requis !";
+                            
+                            header('location:../index.php?p=groupAdd');
+                        }
+                   }
+                }else{
+                    
+                    $_SESSION["msg"]="veuillez choisir une photo avant d'enregistrer !";
+                            
+                    header('location:../index.php?p=groupAdd');
+
+                }
                 //  foreach($utilisateurs as $utilisateur) {
                 //     echo $utilisateur; // Par exemple, afficher les utilisateurs sélectionnés
                 // }
                 // die;
-                //enregistrement dans la bd       
-                // Appeler la méthode create  pour ajouter le group dans la base de données
-                $groupId = $groupBD->createGroup($nom, $utilisateurs);
-                $_SESSION["msg"]="group ".$nom." creer avec succes";
-                // Rediriger vers la page de détails de la news créée
-                header("Location: ../index.php?p=groupList");
+                
                 //exit;
             }
             break;

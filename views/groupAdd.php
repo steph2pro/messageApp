@@ -1,35 +1,29 @@
 
-<div class="container-fluid">
- 
-<?php
-      // Inclure les fichiers des services
-      require_once './services.php';
-    // Appeler la méthode readAllusers pour afficher tous les users
-    $listusers = $userBD->readAllUsers();
-    // Vérifier si la liste des users n'est pas vide
-    if (!empty($listusers)) {
-        // Afficher les éléments dans un tableau
-        ?>
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="text-center">
- 
-      <h1>Ajouter un Groupe de discution!</h1>
-      <form method="post" action="./controllers/groupController.php?action=create"  enctype="multipart/form-data">
-    <div class="row mb-3">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">nom du groupe</label>
-        <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputEmail3" name="nom">
-        </div>
-    </div>
-    <div class="row mb-3">
-          <label for="utilisateurs" class="col-sm-2 col-form-label">Utilisateurs</label>
+<section style="position:absolute; width:100%" class="section">
+	
+<form class="box" style="width: 30%;" action="./controllers/groupController.php?action=create"  enctype="multipart/form-data" method="post" name="login">
+	<h1 class="box-logo box-title"><a href=""> message App</a></h1>
+	<h1 class="box-title">creer un groupe</h1>
+ <?php 
+ $listusers = $userBD->readAllUsers();
+ if (!empty($listusers)) {
+  // Afficher les éléments dans un tableau
+  ?>
+<input type="text" class="box-input" name="nom" placeholder="Nom du groupe" required>
+<p>photo de profil du groupe</p>
+<input type="file" class="box-input" id="inputPassword4" name="profil">
+<p>choisi les membres</p>
+<div class="row mb-3">
+          
           <div class="col-sm-10">
-            <select multiple class="form-control" id="utilisateurs" name="utilisateurs[]">
+            <select multiple class="form-control" size="2" id="utilisateurs" name="utilisateurs[]" class="box-input" style="border:none; width:110%">
             <?php
         foreach ($listusers as $user) {
             
             ?>
-              <option value="<?= $user['id'] ?>"><?= $user['username'] ?> </option>
+              <option value="<?= $user['id'] ?>">
+              <img src="./assets/profiles/<?= $user['profil'] ?>" alt="">
+              <?= $user['username'] ?> </option>
               <?php
                         }
                 } else {
@@ -40,16 +34,13 @@
           </div>
         </div>
 
-    
-    
-    <button type="submit" class="btn btn-primary"> creer</button>
-    </form>
-      
-    </div>
-  </div>
-    
-
-    </div>
 
 
+<input type="submit" value="enregistrer " name="submit" class="box-button" required>
+
+
+</form>
+
+
+</section>
 

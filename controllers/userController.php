@@ -46,7 +46,15 @@ if (isset($_GET['action'])) {
                             // Appeler la méthode create  pour ajouter la user dans la base de données
                             $userId = $userBD->create($nom, $email, $profil, $online);
                             $_SESSION["msg"]="utilisateur enregistrer avec succes";
-                            header('location:../index.php?p=userList');
+                            //connection
+                            $user = $userBD->login($nom,$email);
+                            if (!empty($user)) {
+                                $_SESSION['user'] = $user;
+                            header('location: ../index.php?p=chargement');
+                                
+                            }else{
+                                header('location: ../views/login.php?error=nontrouver');
+                            }
                         }else{
                             //message d'erreur a cause du type de fichier
                             $_SESSION["msg"]="desole,ce fichier n'est pas le type requis !";
@@ -107,10 +115,10 @@ if (isset($_GET['action'])) {
                                 // Appeler la méthode update du userManager pour mettre à jour la user dans la base de données
                                 $userBD->update($nom, $email, $profil, $online,$userId);
                                
-                                $_SESSION["msg"]='l\'utilisateur a ete modifier avec sucess';
+                                $_SESSION["msg"]="l'utilisateur a ete modifier avec sucess";
                                
                                 // Rediriger vers la page de détails de la user modifier
-                                header("Location: ../index.php?p=userList");
+                                header("Location:../index.php?p=userList");
                             
                            
                        }else{

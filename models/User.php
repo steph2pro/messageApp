@@ -43,6 +43,21 @@ public function getProfil() {
 public function setProfil($profil) {
     $this->profil = $profil;
 }
+public function login($username, $email) {
+  // Vérifier si l'utilisateur existe dans la base de données
+  $query = "SELECT * FROM users WHERE username = '$username' AND email = '$email'";
+  $result = $this->db->query($query);
+  
+  if ($result->rowCount() > 0) {
+      // Utilisateur trouvé, récupérer les informations et les renvoyer sous forme de tableau associatif
+      $data = $result->fetch(PDO::FETCH_ASSOC);
+      
+      return $data;
+  } else {
+      // Utilisateur non trouvé, retourner null
+      return null;
+  }
+}
   public function create($username, $email, $profil, $enligne) {
     $query = "INSERT INTO Users (username, email, profil, enligne) VALUES (:username, :email, :profil, :enligne)";
     $stmt = $this->db->prepare($query);
@@ -86,15 +101,16 @@ public function readAllUsers() {
   $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
   return $datas;
 }
-  public function sendMessage($message, $recipient) {
-    // Code pour envoyer un message à un destinataire spécifié
-  }
+public function getUserGroups($userId) {
+  $query = "SELECT * FROM groups g
+            INNER JOIN user_group ug ON g.id = ug.group_id
+            WHERE ug.user_id = :userId";
+  $stmt = $this->db->prepare($query);
+  $stmt->bindParam(':userId', $userId);
+  $stmt->execute();
 
-  public function joinGroup($group) {
-    // Code pour rejoindre un groupe spécifié
-  }
+  $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  public function leaveGroup($group) {
-    // Code pour quitter un groupe spécifié
-  }
+  return $groups;
+}
 }
