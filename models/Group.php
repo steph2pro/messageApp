@@ -33,15 +33,12 @@ public function createGroup($nomGroupe,$profil, $utilisateurs) {
 }
     
     // Méthode pour lire les informations d'un groupe
-    public function readGroup($groupId) {
-      $query = "SELECT * FROM groups WHERE id = ?";
+    public function readGroup($id) {
+      $query = "SELECT * FROM groups WHERE id = :id";
       $stmt = $this->db->prepare($query);
-      $stmt->bind_param("i", $groupId);
+      $stmt->bindValue(':id', $id);
       $stmt->execute();
-      $result = $stmt->get_result();
-      $group = $result->fetch_assoc();
-      
-      return $group;
+      return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
     // Méthode pour mettre à jour les informations d'un groupe

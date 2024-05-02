@@ -30,49 +30,20 @@
             </div>
         </div>
         <!-- messagerie -->
-        <div class="rightSide">
-            <!-- entete -->
-            <div class="header">
-                <div class="imgText">
-                    <div class="userimg">
-                        <img src="user.png" class="cover" alt="">
-                    </div>
-                    <h4>Steph Teams <br><span>en ligne</span></h4>
-                </div>
-                <ul class="nav_icons">
+        <div class="rightSide" >
+            <?php
+                if (isset($_GET['p'])) {
+                    $route=$_GET['p'];
+                    if ($route == "contentGroup") {
+                        require_once 'contentGroup.php';
+                    } else {
+                        echo '<img src="./assets/images/fontGroup.jpg" style="width: 100%;height:100%;position:absolute" alt="">';
+                        
+                    }
                     
-                    <li><ion-icon name="search-outline"></ion-icon></li>
-                    <li><ion-icon name="add-sharp"></ion-icon></li>
-                </ul>
-            </div>
-            <!-- cadre de discution -->
-             <div class="chatBox">
-                 <div class="message my_message">
-                    <p>Hi <br><span>13:50</span></p>
-                 </div> 
-                 <div class="message other_message">
-                    <p>Hello <br><span>13:52</span></p>
-                 </div> 
-                 <div class="message my_message">
-                    <p>Hi <br><span>13:50</span></p>
-                 </div> 
-                 <div class="message other_message">
-                    <p>Hello <br><span>13:52</span></p>
-                 </div> 
-                 <div class="message my_message">
-                    <p>Hi <br><span>13:50</span></p>
-                 </div> 
-                 <div class="message other_message">
-                    <p>Hello <br><span>13:52</span></p>
-                 </div> 
-             </div>
-             <!-- envoie de message -->
-             <div class="chatbox_input">
-                <ion-icon name="happy-outline"></ion-icon>
-                <ion-icon name="attach-sharp"></ion-icon>
-                <input type="text" placeholder="messages">
-                <button type="submit"><ion-icon name="send-outline"></ion-icon></button>
-             </div>
+                }
+            ?>
+            
         </div>
     </div>
     

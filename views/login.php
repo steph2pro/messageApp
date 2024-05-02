@@ -20,7 +20,7 @@ if (isset($_SESSION['error'])) {
 
 <section>
 	
-<form class="box" action="../controllers/connexionController.php" method="post" name="login">
+<form class="box" action="./controllers/connexionController.php" style="width: 50%;" method="post" name="login">
 <h1 class="box-logo box-title"><a href=""> immobilier</a></h1>
 <h1 class="box-title">Connexion</h1>
 <input type="text" class="box-input" name="username" placeholder="Nom d'utilisateur">
@@ -28,7 +28,7 @@ if (isset($_SESSION['error'])) {
 <input type="submit" value="Connexion " name="submit" class="box-button">
 <p class="compte" style="display: flex;">
 	si vous n'avez pas de compte
-	<a href="compte.php" style="margin-left: 10px;margin-top: -5px">
+	<a href="./views/compte.php" style="margin-left: 10px;margin-top: -5px">
 	creer un compte
 	</a>
 </p>

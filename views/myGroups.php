@@ -10,7 +10,7 @@ if (!empty($listgroups)) {
         
         ?>
             
-            <a href="?p=groupUpdate&id=<?= $group['id'] ?>"  style="text-decoration: none;">
+            <a href="?p=contentGroup&id=<?= $group['id'] ?>"  style="text-decoration: none;">
             
             <div class="block active">
                     <div class="imgbx">
