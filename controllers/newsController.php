@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                 $_SESSION["msg"]='la nouvele de '.$auteur.' ajouter avec sucess';
                 
                 // Rediriger vers la page de détails de la news créée
-                header("Location: ../index.php?p=list");
+                header("Location: ../index.php?p=listNews");
                 //exit;
             }
             break;

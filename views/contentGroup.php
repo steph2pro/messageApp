@@ -17,34 +17,39 @@
                 <ul class="nav_icons">
                     
                     <li><ion-icon name="search-outline"></ion-icon></li>
-                    <li><ion-icon name="add-sharp"></ion-icon></li>
+                    <a href="?p=listUserGroup&id=<?= $group['id'] ?>"  style="text-decoration: none;">
+                    <li><ion-icon name="people-sharp"></ion-icon></li>
+                    </a>
+                    <a href="?p=addUserGroup&id=<?= $group['id'] ?>"  style="text-decoration: none;">
+                    <li><ion-icon name="person-add-sharp"></ion-icon></li>
+                    </a>
                 </ul>
-            </div>
+ </div>
             <!-- cadre de discution -->
              <div class="chatBox">
+               <?php
+               $messages= $messageBD->MessagesofGroup($id);
+               if (!empty($listgroups)) {
+    // Afficher les éléments dans un tableau
+   
+    echo "<h5 style='text-align:center;color: dodgerblue;'>vos groupes de discution</h5>";
+    foreach ($listgroups as $group) {
+    }}
+        ?>
                  <div class="message my_message">
                     <p>Hi <br><span>13:50</span></p>
                  </div> 
-                 <div class="message other_message">
-                    <p>Hello <br><span>13:52</span></p>
-                 </div> 
                  <div class="message my_message">
                     <p>Hi <br><span>13:50</span></p>
-                 </div> 
-                 <div class="message other_message">
-                    <p>Hello <br><span>13:52</span></p>
-                 </div> 
-                 <div class="message my_message">
-                    <p>Hi <br><span>13:50</span></p>
-                 </div> 
-                 <div class="message other_message">
-                    <p>Hello <br><span>13:52</span></p>
                  </div> 
              </div>
              <!-- envoie de message -->
+               <form method="post" action="./controllers/messageController.php?action=send&id=<?= $group['id'] ?>">
              <div class="chatbox_input">
                 <ion-icon name="happy-outline"></ion-icon>
                 <ion-icon name="attach-sharp"></ion-icon>
-                <input type="text" placeholder="messages">
+                <input type="text" placeholder="messages" name="content">
                 <button type="submit"><ion-icon name="send-outline"></ion-icon></button>
+               
              </div>
+            </form>

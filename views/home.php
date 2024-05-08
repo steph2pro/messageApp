@@ -9,8 +9,12 @@
                     <h4><?= $_SESSION['user']["username"] ?><br><span>en ligne</span></h4>
                 </div>
                 <ul class="nav_icons">
-                    <li><ion-icon name="scan-circle-outline"></ion-icon></li>
+                    <a href="?p=listNews"  style="text-decoration: none;">
+                        <li><ion-icon name="scan-circle-outline"></ion-icon></li>
+                    </a>
+                    <a href="?p=myGroup"  style="text-decoration: none;">
                     <li><ion-icon name="logo-wechat"></ion-icon></li>
+                    </a>
                     <a href="?p=groupAdd"  style="text-decoration: none;">
                         <li><ion-icon name="add-sharp"></ion-icon></li>
                     </a>
@@ -26,7 +30,20 @@
             </div>
             <!-- liste des groupes -->
             <div class="chatlist">
-                <?php  require_once 'myGroups.php';  ?>
+                <?php 
+                if (isset($_GET['p'])) {
+                    $route=$_GET['p'];
+                    if ($route == "listNews" || $route == "contentnews") {
+                        require_once 'newsList.php'; 
+                    }elseif($route == "myGroup" || $route == "contentGroup"){
+                        require_once 'myGroups.php'; 
+                    }
+
+            }else{
+                require_once 'myGroups.php'; 
+            }
+                        
+                 ?>
             </div>
         </div>
         <!-- messagerie -->
@@ -36,7 +53,13 @@
                     $route=$_GET['p'];
                     if ($route == "contentGroup") {
                         require_once 'contentGroup.php';
-                    } else {
+                    } elseif($route == "listNews"){
+                        require_once 'acceuil.php';
+                    }elseif($route == "contentnews"){
+                        require_once 'contentnews.php';
+                    }
+                    else {
+                       // var_dump($_se)
                         echo '<img src="./assets/images/fontGroup.jpg" style="width: 100%;height:100%;position:absolute" alt="">';
                         
                     }
@@ -58,7 +81,7 @@
                     case 'acc':
                         require_once 'views/acceuil.php';
                         break;
-                    case 'add':
+                    case 'addNews':
                         require_once 'views/newsAdd.php';
                         break;
                     case 'list':
@@ -84,8 +107,11 @@
 					 case 'groupAdd':
                         require_once 'groupAdd.php';
                         break;
-                    case 'groupList':
-                            require_once 'views/groupList.php';
+					 case 'addUserGroup':
+                        require_once 'addUserGroup.php';
+                        break;
+                    case 'listUserGroup':
+                            require_once 'listUserGroup.php';
                             break;
                     
                                

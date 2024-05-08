@@ -73,39 +73,18 @@ if (isset($_GET['action'])) {
             break;
 
 
-        case 'update':
+        case 'addUuserGroup':
             // Vérifier si les données du formulaire sont soumises
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Récupérer les données du formulaire
-                $newsId = $_GET['id'];
-                $auteur = $_POST['auteur'];
-                $titre = $_POST['titre'];
-                $contenu = $_POST['contenu'];
-                $dateModif = date('Y-m-d H:i:s');
-
-                // Récupérer les détails de la news à mettre à jour
-                $newsDetails = $newsManager->read($newsId);
-
-                // Vérifier si la news existe
-                if ($newsDetails) {
-                    // Mettre à jour les propriétés de la news
-                    $newsDetails['auteur'] = $auteur;
-                    $newsDetails['titre'] = $titre;
-                    $newsDetails['contenu'] = $contenu;
-                    $newsDetails['dateModif'] = $dateModif;
-
-                    // Créer une nouvelle instance de la classe News avec les nouvelles valeurs
-                    $news = new News($newsDetails['auteur'], $newsDetails['titre'], $newsDetails['contenu'], $newsDetails['dateAjout'], $newsDetails['dateModif']);
-                    $news->setId($newsId);
-
-                    // Appeler la méthode update du NewsManager pour mettre à jour la news dans la base de données
-                    $newsManager->update($news);
-
-                    $_SESSION["msg"]='la nouvele de '.$auteur.' a ete modifier avec sucess';
+                $groupId = $_GET['id'];
+                $utilisateurs = $_POST['utilisateurs'];
+                $groupBD->addUserToGroup($groupId, $utilisateurs);
+                    $_SESSION["msg"]='les utilisateur ont ete ajouter au groupe avec sucess';
                     
                     // Rediriger vers la page de détails de la news modifier
-                    header("Location: ../index.php?p=list");
-                }
+                    header("Location: ../index.php");
+                
             }
             break;
 
@@ -124,13 +103,5 @@ if (isset($_GET['action'])) {
             }
             break;
 
-        default:
-            // Rediriger vers une page d'erreur ou une autre page appropriée
-            header("Location: error.php");
-            exit;
     }
-} else {
-    // Rediriger vers une page d'erreur ou une autre page appropriée
-    header("Location: error.php");
-    exit;
-}
+} 

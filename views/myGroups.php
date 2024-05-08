@@ -5,14 +5,14 @@ $listgroups = $userBD->getUserGroups($userId);
 if (!empty($listgroups)) {
     // Afficher les éléments dans un tableau
    
-    
+    echo "<h5 style='text-align:center;color: dodgerblue;'>vos groupes de discution</h5>";
     foreach ($listgroups as $group) {
         
         ?>
             
             <a href="?p=contentGroup&id=<?= $group['id'] ?>"  style="text-decoration: none;">
             
-            <div class="block active">
+            <div class="block <?php if (isset($_GET['id']) && $_GET['id']== $group['id']) {echo "active";} ?>">
                     <div class="imgbx">
                         <img src="./assets/profiles/<?= $group["profil"] ?>" alt="" class="cover">
                     </div>
@@ -38,7 +38,7 @@ if (!empty($listgroups)) {
     echo "Vous n'avez aucun group.";
 }
 ?>
-
+<!-- 
                 <div class="block nonlue">
                     <div class="imgbx">
                         <img src="user.png" alt="" class="cover">
@@ -53,4 +53,4 @@ if (!empty($listgroups)) {
                             <b>3</b>
                         </div>
                     </div>
-                </div>
+                </div> -->

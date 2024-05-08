@@ -1,41 +1,24 @@
 
-<div class="container-fluid">
+<section style="position:absolute; width:100%" class="section">
+	
+<form class="box" style="width: 30%;" action="./controllers/newsController.php?action=create""  enctype="multipart/form-data" method="post" name="login">
+	<h1 class="box-logo box-title"> message App<a href="./index.php" style="margin-left: 100px;position:absolute"><ion-icon name="close-sharp"></ion-icon></a></h1>
+	<h1 class="box-title">Ajouter une News!</h1>
  
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="text-center">
- 
-      <h1>Ajouter une News!</h1>
-      <form method="post" action="./controllers/newsController.php?action=create">
-    <div class="row mb-3">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Auteur</label>
-        <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputEmail3" name="auteur">
-        </div>
-    </div>
-
-
-    <div class="row mb-3">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">titre</label>
-        <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputPassword3" name="titre">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">contenue</label>
-        <div class="col-sm-10">
-        <textarea type="text" class="form-control" id="inputPassword3" name="contenu">
+<input type="text" class="box-input" name="auteur" placeholder="Nom de l'auteue" required>
+<input type="text" class="box-input" name="titre" placeholder="Titre de la news" required>
+<textarea type="text" class="box-input" id="contenue" name="contenu">
+  entrez le contenue de la nouvelle
         </textarea>
-        </div>
-    </div>
-    
-    <button type="submit" class="btn btn-primary"> enregistrer</button>
-    </form>
-      
-    </div>
-  </div>
-    
 
-    </div>
 
+
+<input type="submit" value="enregistrer " name="submit" class="box-button" required>
+
+
+</form>
+
+
+</section>
 
 

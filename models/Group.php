@@ -31,6 +31,15 @@ public function createGroup($nomGroupe,$profil, $utilisateurs) {
   
   return $groupId;
 }
+public function addUserToGroup($groupId, $utilisateurs) {
+  foreach ($utilisateurs as $utilisateur) {
+    $query = "INSERT INTO user_group (user_id, group_id) VALUES (:utilisateur, :groupId)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindValue(':utilisateur', $utilisateur);
+    $stmt->bindValue(':groupId', $groupId);
+    $stmt->execute();
+  }
+}
     
     // Méthode pour lire les informations d'un groupe
     public function readGroup($id) {
@@ -74,6 +83,15 @@ public function readAllGroups() {
   $stmt->execute();
   $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
   return $datas;
+}
+public function readAllUsersByGroup($groupId) {
+  $query = "SELECT u.* FROM user_group ug 
+            INNER JOIN users u ON ug.user_id = u.id
+            WHERE ug.group_id = :groupId";
+  $stmt = $this->db->prepare($query);
+  $stmt->bindValue(':groupId', $groupId);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
     public function addMember($user) {
       // Code pour ajouter un utilisateur en tant que membre du groupe
