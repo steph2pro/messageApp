@@ -11,12 +11,13 @@ class Group {
     }
     
     // Méthode pour créer un groupe
-public function createGroup($nomGroupe,$profil, $utilisateurs) {
+public function createGroup($nomGroupe,$profil, $utilisateurs,$date) {
   // Insérer le groupe dans la base de données
-  $query = "INSERT INTO groups (name,profil) VALUES (:nomGroupe,:profil)";
+  $query = "INSERT INTO groups (name,profil) VALUES (:nomGroupe,:profil,:date_add)";
   $stmt = $this->db->prepare($query);
   $stmt->bindValue(':nomGroupe', $nomGroupe);
   $stmt->bindValue(':profil', $profil);
+  $stmt->bindValue(':date_add', $date);
   $stmt->execute();
   $groupId = $this->db->lastInsertId();
   
@@ -31,13 +32,29 @@ public function createGroup($nomGroupe,$profil, $utilisateurs) {
   
   return $groupId;
 }
-public function addUserToGroup($groupId, $utilisateurs) {
+
+public function addUserToGroup($groupId, $utilisateurs,$date) {
+  
+
   foreach ($utilisateurs as $utilisateur) {
-    $query = "INSERT INTO user_group (user_id, group_id) VALUES (:utilisateur, :groupId)";
+    // Vérifie si l'utilisateur est déjà associé au groupe
+    $query = "SELECT COUNT(*) FROM user_group WHERE user_id = :utilisateur AND group_id = :groupId";
     $stmt = $this->db->prepare($query);
     $stmt->bindValue(':utilisateur', $utilisateur);
     $stmt->bindValue(':groupId', $groupId);
     $stmt->execute();
+
+    $count = $stmt->fetchColumn();
+
+    if ($count == 0) {
+      // L'utilisateur n'est pas encore associé au groupe, effectue l'insertion
+      $insertQuery = "INSERT INTO user_group (user_id, group_id, date_add) VALUES (:utilisateur, :groupId, :date)";
+      $insertStmt = $this->db->prepare($insertQuery);
+      $insertStmt->bindValue(':utilisateur', $utilisateur);
+      $insertStmt->bindValue(':groupId', $groupId);
+      $insertStmt->bindValue(':date', $date);
+      $insertStmt->execute();
+    }
   }
 }
     

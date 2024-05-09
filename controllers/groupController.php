@@ -17,6 +17,7 @@ if (isset($_GET['action'])) {
                 $utilisateurs = $_POST['utilisateurs'];
                 $profil = $_POST['profil'];
                 
+                $date = date("Y-m-d H:i:s"); 
                 if (isset($_FILES["profil"])){
                           
                     # recuperation des information sur limage
@@ -45,7 +46,7 @@ if (isset($_GET['action'])) {
                             move_uploaded_file($tmp_name,$img_upload_path);
                             //enregistrement dans la bd       
                             // Appeler la méthode create  pour ajouter le group dans la base de données
-                            $groupId = $groupBD->createGroup($nom,$profil, $utilisateurs);
+                            $groupId = $groupBD->createGroup($nom,$profil, $utilisateurs,$date);
                             $_SESSION["msg"]="group ".$nom." creer avec succes";
                             // Rediriger vers la page de détails de la news créée
                             header("Location: ../index.php");
@@ -79,7 +80,8 @@ if (isset($_GET['action'])) {
                 // Récupérer les données du formulaire
                 $groupId = $_GET['id'];
                 $utilisateurs = $_POST['utilisateurs'];
-                $groupBD->addUserToGroup($groupId, $utilisateurs);
+                $date = date("Y-m-d H:i:s"); 
+                $groupBD->addUserToGroup($groupId, $utilisateurs,$date);
                     $_SESSION["msg"]='les utilisateur ont ete ajouter au groupe avec sucess';
                     
                     // Rediriger vers la page de détails de la news modifier

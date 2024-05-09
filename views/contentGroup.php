@@ -8,7 +8,7 @@ require_once 'C:\xampp\htdocs\messageApp\controllers\messageController.php';
 $id = $_GET['id'];
 $group = $groupBD->readGroup($id);
 
-$message_id = $_SESSION["user"]["message_id"];
+$message_id = $_SESSION["user"]["id"];
 $message = $messageDB->readMessage($message_id);
 $messages = $messageDB->readAllMessage();
 // Vérifier si la liste des news n'est pas vide
