@@ -49,7 +49,7 @@ class NewsManager {
     
 
     public function readAllNews() {
-        $sql = "SELECT * FROM news";
+        $sql = "SELECT * FROM news ORDER BY id DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);

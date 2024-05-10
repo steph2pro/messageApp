@@ -83,4 +83,24 @@ class Message
 
     return $messages;
   }
+  public function compareDates($date1, $date2) {
+    $timestamp1 = strtotime($date1);
+    $timestamp2 = strtotime($date2);
+  
+    if ($timestamp1 < $timestamp2) {
+      return -1; // La première date est antérieure à la deuxième date
+    } elseif ($timestamp1 > $timestamp2) {
+      return 1; // La première date est postérieure à la deuxième date
+    } else {
+      return 0; // Les deux dates sont identiques
+    }
+  }
+  public function readGroupMessages($group_id) {
+    $sql = "SELECT * FROM messages WHERE recipient = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([$group_id]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 }

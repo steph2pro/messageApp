@@ -2,13 +2,16 @@
 <div class="container">
         <div class="leftSide">
             <div class="header">
-            <div class="imgText">
+            <div class="imgText" style="width: 70%;">
                     <div class="userimg">
                     <img src="./assets/profiles/<?= $_SESSION['user']["profil"] ?>" class="cover" alt="">
                     </div>
-                    <h4><?= $_SESSION['user']["username"] ?><br><span>en ligne</span></h4>
+                    <h6><?= $_SESSION['user']["username"] ?><br><span style="font-size: 0.7em;">en ligne</span></h6>
                 </div>
                 <ul class="nav_icons">
+                    <a href="?p=log-out"  style="text-decoration: none;">
+                        <li><ion-icon name="log-out-outline"></ion-icon></li>
+                    </a>
                     <a href="?p=listNews"  style="text-decoration: none;">
                         <li><ion-icon name="scan-circle-outline"></ion-icon></li>
                     </a>
@@ -78,8 +81,8 @@
             
                 switch ($route) {
                     
-                    case 'acc':
-                        require_once 'views/acceuil.php';
+                    case 'log-out':
+                        require_once 'controllers/deconnection.php';
                         break;
                     case 'addNews':
                         require_once 'views/newsAdd.php';
@@ -88,9 +91,9 @@
                             require_once 'views/newsList.php';
                             break;
                     
-                     case 'update':
-                                require_once 'views/newsUpdate.php';
-                                break;
+                    //  case 'chargement':
+                    //             require_once 'views/chargement.php';
+                    //             break;
                      case 'view':
                         require_once 'views/newsView.php';
                         break;

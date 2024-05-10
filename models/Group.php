@@ -13,7 +13,7 @@ class Group {
     // Méthode pour créer un groupe
 public function createGroup($nomGroupe,$profil, $utilisateurs,$date) {
   // Insérer le groupe dans la base de données
-  $query = "INSERT INTO groups (name,profil) VALUES (:nomGroupe,:profil,:date_add)";
+  $query = "INSERT INTO groups (name,profil,date_create) VALUES (:nomGroupe,:profil,:date_add)";
   $stmt = $this->db->prepare($query);
   $stmt->bindValue(':nomGroupe', $nomGroupe);
   $stmt->bindValue(':profil', $profil);
@@ -23,10 +23,11 @@ public function createGroup($nomGroupe,$profil, $utilisateurs,$date) {
   
   // Ajouter les utilisateurs au groupe
   foreach ($utilisateurs as $utilisateur) {
-    $query = "INSERT INTO user_group (user_id, group_id) VALUES (:utilisateur, :groupId)";
+    $query = "INSERT INTO user_group (user_id, group_id,date_add) VALUES (:utilisateur, :groupId,:date_add)";
     $stmt = $this->db->prepare($query);
     $stmt->bindValue(':utilisateur', $utilisateur);
     $stmt->bindValue(':groupId', $groupId);
+    $stmt->bindValue(':date_add', $date);
     $stmt->execute();
   }
   
@@ -110,15 +111,20 @@ public function readAllUsersByGroup($groupId) {
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-    public function addMember($user) {
-      // Code pour ajouter un utilisateur en tant que membre du groupe
-    }
-  
-    public function removeMember($user) {
-      // Code pour supprimer un utilisateur du groupe
-    }
-  
-    public function sendMessage($message) {
-      // Code pour envoyer un message à tous les membres du groupe
-    }
+    
+public function getUserGroupDate($userId, $groupId) {
+  $query = "SELECT date_add FROM user_group WHERE user_id = :userId AND group_id = :groupId";
+  $stmt = $this->db->prepare($query);
+  $stmt->bindValue(':userId', $userId);
+  $stmt->bindValue(':groupId', $groupId);
+  $stmt->execute();
+
+  $result = $stmt->fetch();
+
+  if ($result) {
+    return $result['date_add'];
+  } else {
+    return null; // L'utilisateur n'est pas associé au groupe
+  }
+}
   }

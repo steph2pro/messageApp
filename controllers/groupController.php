@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
                 // Récupérer les données du formulaire
                 $nom = $_POST['nom'];
                 $utilisateurs = $_POST['utilisateurs'];
-                $profil = $_POST['profil'];
+                //$profil = $_POST['profil'];
                 
                 $date = date("Y-m-d H:i:s"); 
                 if (isset($_FILES["profil"])){

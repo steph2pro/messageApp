@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>chargement </title>
-	<link rel="stylesheet" type="text/css" href="../assets/styles/style-chargement.css">
+	<link rel="stylesheet" type="text/css" href="./assets/styles/style-chargement.css">
 
-	<script type="text/javascript" src="../assets/js/app2.js" defer></script>
+	<script type="text/javascript" src="./assets/js/app2.js" defer></script>
 </head>
 <body>
 	<div class="loader">

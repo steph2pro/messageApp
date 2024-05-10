@@ -10,7 +10,7 @@ $group = $groupBD->readGroup($id);
 
 $message_id = $_SESSION["user"]["id"];
 $message = $messageDB->readMessage($message_id);
-$messages = $messageDB->readAllMessage();
+$messages = $messageDB->readGroupMessages($id);
 // Vérifier si la liste des news n'est pas vide
 ?>
 <!-- entete -->
@@ -37,6 +37,7 @@ $messages = $messageDB->readAllMessage();
 <div class="chatBox">
 
 <?php
+$date_add=$groupBD->getUserGroupDate($_SESSION["user"]["id"],$id);
 
 // var_dump($_SESSION);
 ?>
@@ -46,21 +47,26 @@ echo '<pre>';
         echo '</pre>';
 ?-->
 
-    <?php foreach ($messages as $message) { ?>
+    <?php foreach ($messages as $message) { 
+      $cpdate=$messageDB->compareDates($message["time"],$date_add);
+      if ($cpdate==1 || $cpdate==0) {
+       
+      
+      ?>
         <div class="message <?= ($message['sender'] === $_SESSION['user']['id']) ? 'my_message' : 'other_message' ?>">
             <p>
                 <?= $message["content"] ?> <br>
                 <span><?= substr($message["time"], 0, 5) ?></span>
             </p>
         </div>
-    <?php } ?>
-
+    <?php } } ?>
+<!-- 
    <div class="message my_message">
             <p>
                 <?= $message["content"] ?> <br>
                 <span><?= substr($message["time"], 0, 5) ?></span>
             </p>
-   </div>
+   </div> -->
 
 </div>
 <!-- <div class="message other_message">

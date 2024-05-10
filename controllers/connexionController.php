@@ -15,10 +15,10 @@
         header('location: ../index.php?p=chargement');
              
         }else{
-             header('location: ../views/login.php?error=nontrouver');
+             header('location: ../index.php?error=nontrouver');
         }
 
     }else{
-        header('location: ../views/login.php?error=vide');
+        header('location: ../index.php?error=vide');
     }
 ?>

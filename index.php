@@ -27,6 +27,10 @@
      $active = '';
     if (isset($_GET['p'])) {
          $active=$_GET['p'];
+         
+        //  if ($active=="chargement") {
+        //     require_once './views/chargement.php'; 
+        //  }
     }
 ?>
 </head>
@@ -38,8 +42,16 @@
         require_once './services.php'; 
          require_once './views/home.php'; 
         
-    }else{
+    }elseif(!isset($_SESSION['user']) && $active=="login"){
         require_once './views/login.php'; 
+    }
+    else{
+        if ($active=="compte") {
+            require_once './views/compte.php'; 
+         }else{
+            require_once './views/login.php'; 
+         }
+         
     }
 ?>
     

@@ -1,5 +1,5 @@
 <?php 
-session_start(); 
+//session_start(); 
  
  ?>
 
@@ -27,7 +27,7 @@ session_start();
 
 <section>
 	
-<form class="box" action="../controllers/userController.php?action=create"  enctype="multipart/form-data" method="post" name="login">
+<form class="box" action="../controllers/userController.php?action=create" style="width: 36%;"  enctype="multipart/form-data" method="post" name="login">
 	<h1 class="box-logo box-title"><a href=""> message App</a></h1>
 	<h1 class="box-title">creer votre compte</h1>
 <input type="text" class="box-input" name="nom" placeholder="votre nom Complet" required>
@@ -36,7 +36,7 @@ session_start();
 <input type="submit" value="enregistrer " name="submit" class="box-button" required>
 <p class="compte" style="display: flex;">
 	si vous avez deja un compte
-	<a href="login.php" style="margin-left: 10px;margin-top: -5px">
+	<a href="?p=login" style="margin-left: 10px;margin-top: -5px">
 	connectez vous
 	</a>
 </p>
