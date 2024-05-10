@@ -27,7 +27,7 @@
 
 <section>
 	
-<form class="box" action="../controllers/userController.php?action=create" style="width: 36%;"  enctype="multipart/form-data" method="post" name="login">
+<form class="box" action="./controllers/userController.php?action=create" style="width: 36%;"  enctype="multipart/form-data" method="post" name="login">
 	<h1 class="box-logo box-title"><a href=""> message App</a></h1>
 	<h1 class="box-title">creer votre compte</h1>
 <input type="text" class="box-input" name="nom" placeholder="votre nom Complet" required>

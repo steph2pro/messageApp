@@ -50,7 +50,7 @@ if (isset($_GET['action'])) {
                             $user = $userBD->login($nom,$email);
                             if (!empty($user)) {
                                 $_SESSION['user'] = $user;
-                            header('location: ../index.php?p=chargement');
+                                header('location: ../index.php');
                                 
                             }else{
                                 header('location: ../views/login.php?error=nontrouver');
@@ -151,7 +151,7 @@ if (isset($_GET['action'])) {
                 $_SESSION["msg"]="l'utilisateur a ete suprimer avec sucess";
                     
                 // Rediriger vers la page de détails de la user modifier
-                header("Location: ../index.php?p=userList");
+                header("Location: ../index.php");
             }
             break;
 

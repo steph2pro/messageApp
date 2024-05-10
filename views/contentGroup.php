@@ -7,7 +7,7 @@ require_once 'C:\xampp\htdocs\messageApp\controllers\messageController.php';
 
 $id = $_GET['id'];
 $group = $groupBD->readGroup($id);
-
+$createur=$_SESSION["user"]["id"];
 $message_id = $_SESSION["user"]["id"];
 $message = $messageDB->readMessage($message_id);
 $messages = $messageDB->readGroupMessages($id);
@@ -19,17 +19,23 @@ $messages = $messageDB->readGroupMessages($id);
       <div class="userimg">
          <img src="./assets/profiles/<?= $group['profil'] ?>" class="cover" alt="">
       </div>
-      <h4><?= $group['name'] ?><br><span>actif</span></h4>
+      <h4><?= $group['name'] ?><br><span>actif</span><span> <?php if ($createur==$group["createur"]){ echo "(admin)"; } ?> </span></h4>
    </div>
    <ul class="nav_icons">
 
       <li><ion-icon name="search-outline"></ion-icon></li>
+      <?php 
+      if ($createur==$group["createur"]) {
+        
+      
+      ?>
       <a href="?p=listUserGroup&id=<?= $group['id'] ?>" style="text-decoration: none;">
          <li><ion-icon name="people-sharp"></ion-icon></li>
       </a>
       <a href="?p=addUserGroup&id=<?= $group['id'] ?>" style="text-decoration: none;">
          <li><ion-icon name="person-add-sharp"></ion-icon></li>
       </a>
+      <?php } ?>
    </ul>
 </div>
 
