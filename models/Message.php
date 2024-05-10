@@ -83,6 +83,15 @@ class Message
 
     return $messages;
   }
+
+  public function readGroupMessages($group_id) {
+    $sql = "SELECT * FROM messages WHERE recipient = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([$group_id]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
   public function compareDates($date1, $date2) {
     $timestamp1 = strtotime($date1);
     $timestamp2 = strtotime($date2);
@@ -95,12 +104,4 @@ class Message
       return 0; // Les deux dates sont identiques
     }
   }
-  public function readGroupMessages($group_id) {
-    $sql = "SELECT * FROM messages WHERE recipient = ?";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute([$group_id]);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-  }
-
 }

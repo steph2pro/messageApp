@@ -36,31 +36,30 @@ $messages = $messageDB->readGroupMessages($id);
 <!-- cadre de discution -->
 <div class="chatBox">
 
-<?php
-$date_add=$groupBD->getUserGroupDate($_SESSION["user"]["id"],$id);
-
-// var_dump($_SESSION);
-?>
-<!--?php
-echo '<pre>';
-        var_dump($_SESSION);
-        echo '</pre>';
+   <?php
+   $date_add = $groupBD->getUserGroupDate($_SESSION["user"]["id"], $id);
+   ?>
+   <!--?php
+// echo '<pre>';
+//         var_dump($_SESSION);
+//         echo '</pre>';
 ?-->
 
-    <?php foreach ($messages as $message) { 
-      $cpdate=$messageDB->compareDates($message["time"],$date_add);
-      if ($cpdate==1 || $cpdate==0) {
-       
-      
-      ?>
-        <div class="message <?= ($message['sender'] === $_SESSION['user']['id']) ? 'my_message' : 'other_message' ?>">
+   <?php foreach ($messages as $message) {
+      $cpdate = $messageDB->compareDates($message["time"], $date_add);
+      if ($cpdate == 1 || $cpdate == 0) {
+
+
+   ?>
+         <div class="message <?= ($message['sender'] === $_SESSION['user']['id']) ? 'my_message' : 'other_message' ?>">
             <p>
-                <?= $message["content"] ?> <br>
-                <span><?= substr($message["time"], 0, 5) ?></span>
+               <?= $message["content"] ?> <br>
+               <span><?= substr($message["time"], 11, 5) ?></span>
             </p>
-        </div>
-    <?php } } ?>
-<!-- 
+         </div>
+   <?php }
+   } ?>
+   <!-- 
    <div class="message my_message">
             <p>
                 <?= $message["content"] ?> <br>
@@ -69,21 +68,6 @@ echo '<pre>';
    </div> -->
 
 </div>
-<!-- <div class="message other_message">
-      <p>Hello <br><span>13:52</span></p>
-   </div>
-   <div class="message my_message">
-      <p>Hi <br><span>13:50</span></p>
-   </div>
-   <div class="message other_message">
-      <p>Hello <br><span>13:52</span></p>
-   </div>
-   <div class="message my_message">
-      <p>Hi <br><span>13:50</span></p>
-   </div>
-   <div class="message other_message">
-      <p>D'accord<br><span>13:52</span></p>
-   </div> -->
 
 
 <!-- envoie de message -->

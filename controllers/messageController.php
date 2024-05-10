@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $recipient = $_GET['id'];
         $sender = $_SESSION["user"]['id'];
         $content = $_POST['content'];
-        $time = date('H:i');
+        $time = date('Y-m-d H:i:s');
 
         // Créer une nouvelle instance de la classe News
         $messageDB->sendMessage($content, $sender, $recipient, $time);
