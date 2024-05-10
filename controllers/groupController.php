@@ -3,6 +3,7 @@ session_start();
 // Inclure les fichiers des classes
 require_once './services.php';
 // Vérifier l'action passée dans l'URL
+$createur=$_SESSION["user"]["id"];
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 
@@ -46,7 +47,7 @@ if (isset($_GET['action'])) {
                             move_uploaded_file($tmp_name,$img_upload_path);
                             //enregistrement dans la bd       
                             // Appeler la méthode create  pour ajouter le group dans la base de données
-                            $groupId = $groupBD->createGroup($nom,$profil, $utilisateurs,$date);
+                            $groupId = $groupBD->createGroup($nom,$profil, $utilisateurs,$date,$createur);
                             $_SESSION["msg"]="group ".$nom." creer avec succes";
                             // Rediriger vers la page de détails de la news créée
                             header("Location: ../index.php");
@@ -93,15 +94,14 @@ if (isset($_GET['action'])) {
         case 'delete':
             // Vérifier si l'ID de la news est passé dans l'URL
             if (isset($_GET['id'])) {
-                $newsId = $_GET['id'];
-
-                // Appeler la méthode delete du NewsManager pour supprimer la news de la base de données
-                $newsManager->delete($newsId);
-
-                $_SESSION["msg"]='la nouvele a ete suprimer avec sucess';
-                    
+                $userId = $_GET['id'];
+                $groupId = $_GET['idGroup'];
+                $res=$groupBD->removeUserFromGroup($userId, $groupId); 
+                 var_dump($res);
+                 $_SESSION["msg"]=$res;
+                
                 // Rediriger vers la page de détails de la news modifier
-                header("Location: ../index.php?p=list");
+                header("Location: ../index.php");
             }
             break;
 

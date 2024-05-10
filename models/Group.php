@@ -11,13 +11,14 @@ class Group {
     }
     
     // Méthode pour créer un groupe
-public function createGroup($nomGroupe,$profil, $utilisateurs,$date) {
+public function createGroup($nomGroupe,$profil, $utilisateurs,$date,$createur) {
   // Insérer le groupe dans la base de données
-  $query = "INSERT INTO groups (name,profil,date_create) VALUES (:nomGroupe,:profil,:date_add)";
+  $query = "INSERT INTO groups (name,profil,date_create,createur) VALUES (:nomGroupe,:profil,:date_add,:createur)";
   $stmt = $this->db->prepare($query);
   $stmt->bindValue(':nomGroupe', $nomGroupe);
   $stmt->bindValue(':profil', $profil);
   $stmt->bindValue(':date_add', $date);
+  $stmt->bindValue(':createur', $createur);
   $stmt->execute();
   $groupId = $this->db->lastInsertId();
   
@@ -127,4 +128,33 @@ public function getUserGroupDate($userId, $groupId) {
     return null; // L'utilisateur n'est pas associé au groupe
   }
 }
+public function removeUserFromGroup($userId, $groupId) {
+  // Vérifier si l'utilisateur appartient au groupe
+  $query = "SELECT * FROM user_group WHERE user_id = :userId AND group_id = :groupId";
+  $stmt = $this->db->prepare($query);
+  $stmt->bindParam(":userId", $userId);
+  $stmt->bindParam(":groupId", $groupId);
+  $stmt->execute();
+
+  if ($stmt->rowCount() > 0) {
+      // Supprimer l'utilisateur du groupe
+      $deleteQuery = "DELETE FROM user_group WHERE user_id = :userId AND group_id = :groupId";
+      $deleteStmt = $this->db->prepare($deleteQuery);
+      $deleteStmt->bindParam(":userId", $userId);
+      $deleteStmt->bindParam(":groupId", $groupId);
+      $deleteStmt->execute();
+
+      // Retourner un message de réussite
+      return "L'utilisateur a été supprimé du groupe avec succès.";
+  } else {
+      // L'utilisateur n'appartient pas au groupe
+      return "L'utilisateur n'appartient pas au groupe.";
+  }
+}
+
+
+
+
+
+
   }

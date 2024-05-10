@@ -43,6 +43,11 @@ if (!empty($listusers)) {
                             <h4><?= $user["username"] ?></h4>
                             
                         </div>
+                        <div style="left: 250px;top:5px; position:absolute;font-size:1.5em">
+                            <a href="./controllers/groupController.php?action=delete&id=<?= $user["id"] ?>&idGroup=<?= $id ?>">
+                            <ion-icon name="trash-outline"></ion-icon>
+                            </a>
+                        </div>
                     </div>
             </div>
 
