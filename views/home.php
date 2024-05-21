@@ -60,6 +60,8 @@
                         require_once 'acceuil.php';
                     }elseif($route == "contentnews"){
                         require_once 'contentnews.php';
+                    }elseif($route == "restore"){
+                        require_once 'restore.php';
                     }
                     else {
                        // var_dump($_se)

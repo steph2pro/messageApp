@@ -1,7 +1,7 @@
 
 <section style="position:absolute; width:100%" class="section">
 	
-<form class="box" style="width: 30%;" action="./controllers/newsController.php?action=create""  enctype="multipart/form-data" method="post" name="login">
+<form class="box" style="width: 30%;" action="./controllers/newsController.php?action=create"  enctype="multipart/form-data" method="post" name="login">
 	<h1 class="box-logo box-title"> message App<a href="./index.php" style="margin-left: 100px;position:absolute"><ion-icon name="close-sharp"></ion-icon></a></h1>
 	<h1 class="box-title">Ajouter une News!</h1>
  

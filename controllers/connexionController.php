@@ -12,7 +12,7 @@
         // die;
         if (!empty($user)) {
             $_SESSION['user'] = $user;
-        header('location: ../index.php?p=chargement');
+        header('location: ../index.php');
              
         }else{
              header('location: ../index.php?error=nontrouver');

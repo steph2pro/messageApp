@@ -38,11 +38,16 @@ $userId=$_SESSION['user']["id"];
                 <?= $news['contenu'] ?>
                 </p>
                 
-             <div class="" >
+             <div class="" style="margin-left:80%;">
                 
+                <a href="./controllers/newsController.php?action=update&id=<?= $news['id'] ?>" class="btn btn-success">
+                <ion-icon name="create"></ion-icon>
+                </a>  
+                <a href="./controllers/newsController.php?action=delete&id=<?= $news['id'] ?>" class="btn btn-danger">
+                <ion-icon name="trash"></ion-icon>
+                </a>   
                     
-                    
-                </div>
+            </div>
             </div>
              
              </div>

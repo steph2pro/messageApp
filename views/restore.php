@@ -21,17 +21,16 @@ $userId=$_SESSION['user']["id"];
 <div class="header">
                 <div class="imgText">
                   
-                    <h4>la liste detaille de vos news ainsi que leur<b> auteur </b></span></h4>
+                    <h4>la liste detaille de vos news qui on ete suprimer</span></h4>
                 </div>
                 <ul class="nav_icons">
                     
                     <li><ion-icon name="search-outline"></ion-icon></li>
                     <a href="?p=addNews"  style="text-decoration: none;">
                     <li><ion-icon name="add-sharp"></ion-icon></li>
-                    <a href="?p=restore"  style="text-decoration: none;">
-                    <li><ion-icon name="camera-reverse"></ion-icon></li>
-
                     </a>
+                    <a href="?p=restore" style="text-decoration: none;">
+                    <li><ion-icon name="camera-reverse"></ion-icon></li>
 
                     </a>
                 </ul>
@@ -39,31 +38,32 @@ $userId=$_SESSION['user']["id"];
             <!-- cadre de discution -->
              <div class="chatBox">
               <?php  
+                
+                $xml = simplexml_load_file('./models/news_backup.xml');  
               
-              foreach ($listNews as $new) {
+              foreach ($xml->news as $news) {
                 ?>
               <div class="card text-center" style="margin-top: 25px;">
                 <div class="card-header">
-                <?= $new['auteur'] ?>
+                <?= $news->auteur ?>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">
-                  <a href="?p=contentnews&id=<?= $new['id'] ?>" style="text-decoration: none;" > <?= $new['titre'] ?>
-                            </a>
+                  <?= $news->titre ?>
                   </h5>
-                  <p class="card-text"><?= afficherContenuNews($new['contenu'],200); ?></p>
-                  <a href="?p=contentnews&id=<?= $new['id'] ?>" class="btn btn-primary">voir la suite</a>
+                  <p class="card-text"><?= afficherContenuNews($news->contenu,200); ?></p>
+                  <a href="./controllers/newsController.php?action=restore&id=<?= $news->id ?>" class="btn btn-warning">restauter</a>
                 </div>
                 <div class="card-footer text-muted">
                 <div class="row align-items-center" style="font-size: 0.8em;">
                   <div class="col">
-                     creation : <?= $new['dateAjout'] ?>
+                     creation : <?= $news->dateAjout ?>
                   </div>
                   <div class="col">
                     
                   </div>
                   <div class="col">
-                     modification : <?= $new['dateModif'] ?>
+                     modification : <?= $news->dateModif ?>
                   </div>
                 </div>
                 </div>
