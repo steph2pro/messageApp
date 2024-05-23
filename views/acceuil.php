@@ -25,11 +25,12 @@ $userId=$_SESSION['user']["id"];
                 </div>
                 <ul class="nav_icons">
                     
-                    <li><ion-icon name="search-outline"></ion-icon></li>
+                    <li><img src="./assets/svg/search-outline.svg" alt="" width="24" height="24"></li>
                     <a href="?p=addNews"  style="text-decoration: none;">
-                    <li><ion-icon name="add-sharp"></ion-icon></li>
+                    <li><img src="./assets/svg/add-sharp.svg" alt="" width="24" height="24"></li>
                     <a href="?p=restore"  style="text-decoration: none;">
-                    <li><ion-icon name="camera-reverse"></ion-icon></li>
+                    <li><img src="./assets/svg/camera-reverse-outline.svg" alt="" width="24" height="24"></li>
+                    
 
                     </a>
 

@@ -23,17 +23,21 @@ $messages = $messageDB->readGroupMessages($id);
    </div>
    <ul class="nav_icons">
 
-      <li><ion-icon name="search-outline"></ion-icon></li>
+      <li><img src="./assets/svg/search-outline.svg" alt="" width="27" height="27"></li>
       <?php 
       if ($createur==$group["createur"]) {
         
       
       ?>
       <a href="?p=listUserGroup&id=<?= $group['id'] ?>" style="text-decoration: none;">
-         <li><ion-icon name="people-sharp"></ion-icon></li>
+         <li>
+            <img src="./assets/svg/people-sharp.svg" alt="" width="27" height="27" >
+         </li>
       </a>
       <a href="?p=addUserGroup&id=<?= $group['id'] ?>" style="text-decoration: none;">
-         <li><ion-icon name="person-add-sharp"></ion-icon></li>
+         <li>
+            <img src="./assets/svg/person-add-sharp.svg" alt="" width="27" height="27" >
+         </li>
       </a>
       <?php } ?>
    </ul>
@@ -79,9 +83,11 @@ $messages = $messageDB->readGroupMessages($id);
 <!-- envoie de message -->
 <form method="POST">
    <div class="chatbox_input">
-      <ion-icon name="happy-outline"></ion-icon>
-      <ion-icon name="attach-sharp"></ion-icon>
+   <img src="./assets/svg/happy-outline.svg" alt="" width="27" height="27" >
+   <img src="./assets/svg/attach-sharp.svg" alt="" width="27" height="27" >
       <input type="text" placeholder="Votre message..." name="content">
-      <button type="submit" name="send"><ion-icon name="send-outline"></ion-icon></button>
+      <button type="submit" name="send">
+         <img src="./assets/svg/send-outline.svg" alt="" width="27" height="27" >
+      </button>
    </div>
 </form>

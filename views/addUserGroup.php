@@ -8,7 +8,7 @@
 <section style="position:absolute; width:100%" class="section">
 	
 <form class="box" style="width: 30%;" action="./controllers/groupController.php?id=<?= $id ?>&action=addUuserGroup"  enctype="multipart/form-data" method="post" name="login">
-<a href="./index.php" style="margin-left: 25%;position:absolute;font-size:1.5em"><ion-icon name="close-sharp"></ion-icon></a>
+<a href="./index.php" ><img src="./assets/svg/close-sharp.svg" alt="" width="27" height="27" style="margin-left: 25%;position:absolute;font-size:1.5em"></a>
                 <div class="imgText">
                     <div class="userimg">
                         <img src="./assets/profiles/<?= $group['profil'] ?>" class="cover" alt="">

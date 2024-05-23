@@ -10,25 +10,26 @@
                 </div>
                 <ul class="nav_icons">
                     <a href="?p=log-out"  style="text-decoration: none;">
-                        <li><ion-icon name="log-out-outline"></ion-icon></li>
+                        <li><img src="./assets/svg/log-out-outline.svg" alt="" width="24" height="24"></li>
                     </a>
                     <a href="?p=listNews"  style="text-decoration: none;">
-                        <li><ion-icon name="scan-circle-outline"></ion-icon></li>
+                        <li><img src="./assets/svg/scan-circle-outline.svg" alt="" width="24" height="24"></li>
                     </a>
                     <a href="?p=myGroup"  style="text-decoration: none;">
-                    <li><ion-icon name="logo-wechat"></ion-icon></li>
+                    <li>
+                    <img src="./assets/svg/logo-wechat.svg" alt="" width="24" height="24"></li>
                     </a>
                     <a href="?p=groupAdd"  style="text-decoration: none;">
-                        <li><ion-icon name="add-sharp"></ion-icon></li>
+                        <li><img src="./assets/svg/add-sharp.svg" alt="" width="24" height="24"></li>
                     </a>
                     
                 </ul>
             </div>
             <!-- recherche -->
             <div class="chearch_chat">
-                <div>
+                <div style="display:flex">
+                    <b><img src="./assets/svg/search-outline.svg" alt="" width="24" height="24" style="position:absolute;margin:9px 7px"></b>
                     <input type="text" name="recherche" placeholder="rechercher un groupe" id="">
-                    <ion-icon name="search-outline"></ion-icon>
                 </div>
             </div>
             <!-- liste des groupes -->
